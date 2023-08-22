@@ -1,0 +1,15 @@
+{
+  "name": "java_cache",
+  "version": "1.0.0",
+  "description": "This for testing cache",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index"
+  },
+  "author": "Ariyanda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
+}
