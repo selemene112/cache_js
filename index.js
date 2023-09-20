@@ -2,17 +2,11 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const sequelize = require('./src/config/db_pg');
+const userRoutes = require('./src/route/userroute');
 
-const makeMeFunction = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-};
+app.use(express.json());
 
-makeMeFunction();
+app.use('/users', userRoutes);
 
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
