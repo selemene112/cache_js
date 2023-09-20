@@ -1,29 +1,18 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
+const sequelize = require('./src/config/db_pg');
 
-const cache = {};
-
-function checkCache(req, res, next) {
-  const key = req.originalUrl || req.url;
-  if (cache[key]) {
-    console.log('Data ditemukan di cache.');
-    res.send(cache[key]);
-  } else {
-    next();
+const makeMeFunction = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
   }
-}
+};
 
-function saveToCache(req, data) {
-  const key = req.originalUrl || req.url;
-  cache[key] = data;
-}
-
-app.get('/', checkCache, (req, res) => {
-  const data = 'Ini adalah data dari server.';
-  saveToCache(req, data);
-  res.send(data);
-});
+makeMeFunction();
 
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
