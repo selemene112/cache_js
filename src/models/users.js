@@ -1,25 +1,22 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db_pg'); // Sesuaikan dengan lokasi konfigurasi Sequelize Anda
+const sequelize = require('../config/db_pg');
 
 const User = sequelize.define(
-  'User',
+  'Users',
   {
     id: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
-    id_user: {
-      type: DataTypes.STRING(200),
-      allowNull: false,
-    },
+
     username: {
       type: DataTypes.STRING(200),
-      allowNull: false,
+      allowNull: true,
     },
     password: {
       type: DataTypes.STRING(200),
-      allowNull: false,
+      allowNull: true,
     },
     // created_at: {
     //   type: DataTypes.TIMESTAMP,
@@ -31,12 +28,11 @@ const User = sequelize.define(
     // },
   },
   {
-    timestamps: false, // Set to true if you want to include timestamps (createdAt, updatedAt)
-    tableName: 'users', // Nama tabel di basis data
+    timestamps: false,
+    tableName: 'users',
   }
 );
 
-// Sinkronkan model dengan database (tabel akan dibuat jika belum ada)
 User.sync();
 
 module.exports = User;
